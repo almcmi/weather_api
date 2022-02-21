@@ -1,0 +1,48 @@
+<form [formGroup]="weatherForm" (ngSubmit)="submit()" class="container">
+  <h2 class="padding-top-sm">Abygail McMillan's 1-Day Weather API</h2>
+  <br />
+  <div class="row form-group">
+    <div class="col-sm-3">
+      <label for="zipEntry" class="form-label">
+        Please input your zip code:
+        <input id="zipEntry" class="form-control" required type="text" formControlName="zipCode">
+      </label>
+      <!-- need very basic error handling -->
+    </div>
+    <div class="col-sm-3">
+      <label for="country" class="form-label">
+        Please input your country:
+        <input id="country" class="form-control" required type="text" formControlName="country"
+          placeholder='"US", "GB", etc'>
+      </label>
+      <!-- need very basic error handling -->
+    </div>
+    <div>
+      <button class="col-sm-2" type="submit">Submit</button>
+    </div>
+  </div>
+  <br />
+  <br />
+      <!-- Results from weather api go here -->
+  <div>
+    <button class="col-sm-3" type="button" (click)="deleteCity()">Delete Unselected Cities</button>
+  </div>
+  <!-- Cycles through weatherResults array-->
+  <div class="form-check" *ngFor="let result of weatherResults">
+    <label>
+      <input class="form-check-input" type="checkbox" name="cityCheckboxes" #cityCheckboxes
+        value="{{ result.id }}" id="flexCheckDefault" (change)="true" checked>
+        {{ result.name }}
+    </label>
+    <!-- If parent is not checked, that location's weather doesn't show -->
+    <div *ngIf="cityCheckboxes.checked">
+      <ul class="capitalize">
+        <li>Todays temperature: {{ result.weatherNum.temp }} F</li>
+        <li>Feels Like: {{ result.weatherNum.feels_like }} F</li>
+        <li>Today's lows: {{ result.weatherNum.temp_min }} F</li>
+        <li>Today's highs: {{ result.weatherNum.temp_max }} F</li>
+        <li>{{ result.weatherDescrip.description }}</li>
+      </ul>
+    </div>
+  </div>
+</form>

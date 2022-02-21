@@ -1,0 +1,16 @@
+ul.capitalize {
+    text-transform: capitalize;
+}
+
+html, body {
+    height: 100%;
+}
+
+.container {
+    padding-bottom: 25px;
+    background-color: lightgray;
+}
+
+.padding-top-sm {
+    padding-top: 10px;
+}
